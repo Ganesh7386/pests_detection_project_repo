@@ -11,8 +11,8 @@ import matplotlib.pyplot as plt
 # Root directory of the project
 #ROOT_DIR = "D:/python3.6.8_tensorflow_1.14_env/maskrcnn_leave_disease_detection"
 #ROOT_DIR =  "C:/Users/Ganesh/PycharmProjects/detection_of_pests_project"
-ROOT_DIR = "./Dataset"
-dataset_dir1 = os.path.join(ROOT_DIR)
+ROOT_DIR = "/content/pests_detection_project_repo/"
+dataset_dir1 = os.path.join(ROOT_DIR , "Dataset")
 
 # Import Mask RCNN
 sys.path.append(ROOT_DIR)  # To find local version of the library
@@ -24,7 +24,7 @@ COCO_WEIGHTS_PATH = os.path.join(ROOT_DIR, "mask_rcnn_coco.h5")
 
 # Directory to save logs and model checkpoints, if not provided
 # through the command line argument --logs
-DEFAULT_LOGS_DIR = os.path.join(ROOT_DIR, "logs")
+DEFAULT_LOGS_DIR = os.path.join(ROOT_DIR, "/logs")
 
 
 class CustomConfig(Config):
@@ -189,13 +189,14 @@ def train(model):
     """Train the model."""
     # Training dataset.
     dataset_train = CustomDataset()
-    dataset_train.load_custom("D:/python3.6.8_tensorflow_1.14_env/maskrcnn_leave_disease_detection/dataset", "train")
+    #dataset_train.load_custom("D:/python3.6.8_tensorflow_1.14_env/maskrcnn_leave_disease_detection/dataset", "train")
+    dataset_train.load_custom(dataset_dir1, "train")
 
     dataset_train.prepare()
 
     # Validation dataset
     dataset_val = CustomDataset()
-    dataset_val.load_custom("D:/python3.6.8_tensorflow_1.14_env/maskrcnn_leave_disease_detection/dataset", "val")
+    dataset_val.load_custom(dataset_dir1, "val")
     dataset_val.prepare()
 
     # *** This training schedule is an example. Update to your needs ***
